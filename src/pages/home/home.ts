@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import {ANIMALES} from '../../data/data.animales';
 import { Animal } from '../../interfaces/animal.interface';
-
+import { Refresher } from 'ionic-angular';
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
@@ -57,5 +57,16 @@ export class HomePage {
 
    borrar_animal(idx:number) {
      this.animales.splice(idx,1);
+   }
+
+   recargar_animales(refresher:Refresher) {
+        console.log(refresher);
+        console.log('Begin async operation', refresher);
+
+        setTimeout(() => {
+          console.log('Async operation has ended');
+          this.animales = ANIMALES.slice(0);
+          refresher.complete();
+        }, 2000);
    }
 }
