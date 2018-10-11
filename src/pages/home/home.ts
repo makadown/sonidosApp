@@ -2,7 +2,8 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import {ANIMALES} from '../../data/data.animales';
 import { Animal } from '../../interfaces/animal.interface';
-import { Refresher } from 'ionic-angular';
+import { Refresher, reorderArray } from 'ionic-angular';
+
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
@@ -12,6 +13,7 @@ export class HomePage {
   animales:Animal[] = [];
   audio = new Audio();
   audioTiempo: any;
+  ordenando=false;
 
   constructor() {
     /* Crea un clon de los datos en ANIMALES porque 
@@ -68,5 +70,10 @@ export class HomePage {
           this.animales = ANIMALES.slice(0);
           refresher.complete();
         }, 2000);
+   }
+
+   reordenar_animales(indices:any) {
+      console.log(indices);
+      this.animales = reorderArray(this.animales, indices);
    }
 }
